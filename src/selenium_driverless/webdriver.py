@@ -155,7 +155,9 @@ class Chrome:
 
             if self._options.headless and not self._is_remote:
                 # patch useragent
-                if user_agent:
+                if self._options.user_agent:
+                    self._options.add_argument(f"--user-agent={self._options.user_agent}")
+                elif user_agent:
                     self._options.add_argument(f"--user-agent={user_agent}")
                 else:
                     warnings.warn("headless is detectable at first run")
